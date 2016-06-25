@@ -12,3 +12,5 @@ data/
 *.zip
 *.pickle
 /.vagrant
+/provisioning/inventory
+/provisioning/env_vars/
