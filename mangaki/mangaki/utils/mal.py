@@ -72,7 +72,6 @@ def lookup_mal_api(query):
                 data[child.tag] = child.text
             entries.append(data)
     except ET.ParseError:
-        print(HEADERS)
         pass
 
     return entries
@@ -146,7 +145,6 @@ def import_mal(mal_username, mangaki_username):
                         Rating(user=user, work=anime, choice=choice).save()
                         nb_added += 1
             except Exception as e:
-                print(e)
                 SearchIssue(user=user, title=title, poster=poster, mal_id=mal_id, score=score).save()
                 fails.append(title)
     return nb_added, fails
@@ -170,7 +168,8 @@ class MAL:
         try:
             self.entry = ET.fromstring(xml).find('entry')
         except ET.ParseError as e:
-            print(e)
+            # Most likely a Syntax Error.
+            pass
 
     def get_poster(self):
         if self.entry:
